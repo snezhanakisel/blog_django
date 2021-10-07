@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+    {% for post in news %}
+        <div class="alert alert-light">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.text|truncatechars:200 }}</p>
+            <div class="row">
+                <div>
+                   <img src="{{ post.author.profile.img.url }}" alt="post.author" class="user_images">
+                </div>
+                <div class="mt-2">
+                    <span class="text-muted">Публикация: {{ post.date|date:"d E Y, в H:i" }}</span>
+                    <p><b>Автор:</b> <a href="{% url 'user-news' post.author %}">{{ post.author }}</a></p>
+                </div>
+            </div>
+            <a href="{% url 'news-detail' post.id %}" class="btn btn-outline-warning">Читать далее</a>
+        </div>
+    {% endfor %}
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="{% url 'index' %}" class="btn btn-outline-danger">Начало</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-danger">Предыдущая</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+                <button class="btn btn-outline-danger">{{ num }}</button>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a href="?page={{ num }}" class="btn btn-outline-danger">{{ num }}</a>
+            {%  endif %}
+        {%  endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-danger">Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-danger">Последняя</a>
+        {% endif %}
+    {%  endif %}
+{% endblock %}
+
+{%  block aside_block %}
+<h4 class="mt-2">Интересные статьи</h4>
+ <img src="https://itproger.com/img/news/1589893627.jpg" class="img-thumbnail">
+ <p>Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+
+ <a href="https://itproger.com/news/285" target="blank">
+ <button class="btn-warning">Посмотреть</button>
+ </a>
+  <img src="https://itproger.com/img/news/1591879929.jpg" class="img-thumbnail mt-2">
+  <p>Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+
+  <a href="https://itproger.com/news/285" target="blank">
+  <button class="btn-warning">Посмотреть</button>
+  </a>
+{% endblock %}

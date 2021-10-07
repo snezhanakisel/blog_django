@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+  <h1>{{ title }}</h1>
+    <form method="post" class="form-register">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-outline-warning mt-3" type="submit">Зарегистрироваться</button>
+        <hr>
+        <p>Уже зарегистрированы?<a href="{%  url 'user' %}">Войти в личный кабинет</a></p>
+    </form>
+
+{% endblock %}
+
+{% block aside_block %}
+<h4 class="mt-2">Интересные статьи</h4>
+<img src="https://itproger.com/img/news/1591879929.jpg" class="img-thumbnail">
+<p>Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+
+<a href="https://itproger.com/news/285" target="blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+<img src="https://itproger.com/img/news/1589893627.jpg" class="img-thumbnail mt-4">
+<p>Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+
+<a href="https://itproger.com/news/285" target="blank">
+    <button class="btn btn-warning">Посмотреть</button>
+</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% block title %}
+   Удаление статьи
+{% endblock %}
+
+{% block content %}
+  <h1>Вы точно хотите удалить статью "{{ object.title }}"?</h1>
+    <form method="post" class="form-register auth">
+        {% csrf_token %}
+        <button class="btn btn-outline-danger" type="submit">Да, удалить.</button>
+        <a href="{% url 'news-detail' object.id %}">Нет, отмена!</a>
+    </form>
+{% endblock %}
+
+{%  block aside_block %}
+<h4 class="mt-2">Интересные статьи</h4>
+ <img src="https://itproger.com/img/news/1589893627.jpg" class="img-thumbnail">
+ <p>Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+
+ <a href="https://itproger.com/news/285" target="blank">
+ <button class="btn-warning">Посмотреть</button>
+ </a>
+  <img src="https://itproger.com/img/news/1591879929.jpg" class="img-thumbnail mt-2">
+  <p>Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+
+  <a href="https://itproger.com/news/285" target="blank">
+  <button class="btn-warning">Посмотреть</button>
+  </a>
+{% endblock %}
